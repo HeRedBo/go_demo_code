@@ -7,8 +7,7 @@ import (
 
 func add(a, b int) {
 	var c = a + b
-	fmt.Printf("%d + %d = %d", a, b, c)
-	fmt.Println()
+	fmt.Printf("%d + %d = %d\n", a, b, c)
 }
 
 func main() {
