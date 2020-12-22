@@ -12,7 +12,7 @@ type Worker interface {
 =>只有coderPtr才能给worker赋值，只有coderPtr才能加入workders
 */
 type Coder struct {}
-func (c *Coder) Work(hours int) (product string) {
+func (c *Coder)Work(hours int) (product string) {
 	fmt.Println("劳资在工作")
 	return "BUG"
 }
@@ -28,7 +28,7 @@ func main() {
 	//只有指针实现了接口，所以只有指针对象才是接口实例
 	var worker Worker
 	worker = coder
-	worker = CoderPtr
+	worker = coderPtr
 	fmt.Println(worker)
 
 	// 只有指针实现了接口，所以只有指针对象才是接口实例
