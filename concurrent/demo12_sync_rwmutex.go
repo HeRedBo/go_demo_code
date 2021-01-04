@@ -1,5 +1,4 @@
 package main
-
 import (
 	"fmt"
 	"runtime"
@@ -7,29 +6,29 @@ import (
 	"time"
 )
 
-var counter int = 0
+var counter2 int = 0
 
-func add2(a, b int, lock *sync.Mutex) {
+func add5(a, b int, lock *sync.RWMutex) {
 	c := a + b
 	lock.Lock()
-	counter++
-	fmt.Printf("%d: %d + %d = %d\n", counter, a, b, c)
+	counter2++
+	fmt.Printf("%d: %d + %d = %d\n", counter2, a, b, c)
 	lock.Unlock()
 }
 
 func main() {
 	start := time.Now()
-	lock := &sync.Mutex{}
-	for i := 0; i < 1000; i++ {
-		go add2(1, i, lock)
+	lock := &sync.RWMutex{}
+	for i := 0; i < 10; i++ {
+		go add5(1, i, lock)
 	}
 
 	for {
 		lock.Lock()
-		c := counter
+		c := counter2
 		lock.Unlock()
 		runtime.Gosched()
-		if c >= 1000 {
+		if c >= 10 {
 			break
 		}
 	}

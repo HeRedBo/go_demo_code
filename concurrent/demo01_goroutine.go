@@ -12,7 +12,7 @@ func add(a, b int) {
 
 func main() {
 	// go add(1 ,2)
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 1000; i++ {
 		go add(1, i)
 	}
 	time.Sleep(1e9)
