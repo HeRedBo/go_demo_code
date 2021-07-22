@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"helloGO/basic_grammar"
-	"helloGO/func_program"
 )
 
 func main ()  {
@@ -60,7 +58,7 @@ func main ()  {
 
 	//func_program.Defer1()
 	//func_program.Defer2()
-	func_program.Defer4()
+	//func_program.Defer4()
 	// hello world
 	//basic_grammar.Hello()
 
@@ -79,6 +77,14 @@ func main ()  {
 	// 9x9 乘法表
 	// basic_grammar.Math9x9()
 	// 切片
-	basic_grammar.Slice1()
-	basic_grammar.ArraySlice()
+	//basic_grammar.Slice1()
+	//basic_grammar.ArraySlice()
+
+
+	// 异常处理
+	//exception_handling.ErrorPanic()
+
+	// 恐慌与处理
+
+
 }

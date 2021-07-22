@@ -30,7 +30,7 @@ func main() {
 	total := 10
 	var num int32
 	fmt.Printf("number初始值: %d\n", num)
-
+	fmt.Println("启动子协程...")
 	ctx, cancelFunc := context.WithCancel(context.Background())
 	for i :=0; i < total; i ++ {
 		go Addnum2(&num, i , func() {

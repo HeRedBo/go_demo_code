@@ -53,7 +53,7 @@ func MakeHisPtrLove(p *Person) {
 
 
 /*创建空白对象并访问属性和方法*/
-func main0012() {
+func main() {
 	//创建空白的Person对象（object）/实例(instance)
 	rangge := Person{}
 
@@ -114,7 +114,7 @@ func main016() {
 	fmt.Println(pp)
 }
 
-func main() {
+func main17() {
 	p := Person{"西门阿让", 8, false, []string{"撸代码", "完美的撸代码"}}
 	p.SelfIntroduce()
 }

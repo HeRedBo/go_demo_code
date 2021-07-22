@@ -16,7 +16,7 @@ func addNum(a, b int, deferFunc func()) {
 
 func main() {
 	total := 20
-	step := 2
+	step := 10
 
 	fmt.Println("启动子协程")
 	var wg sync.WaitGroup

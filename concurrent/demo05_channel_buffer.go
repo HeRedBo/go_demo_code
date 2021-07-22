@@ -7,7 +7,7 @@ import (
 
 func test(ch chan int) {
 	for i := 0; i < 100; i++ {
-		ch <- 1
+		ch <- i
 	}
 	close(ch)
 }

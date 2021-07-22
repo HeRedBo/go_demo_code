@@ -21,7 +21,7 @@ func main() {
 	start := time.Now()
 	// 最大cpu 核心数
 	cpus := runtime.NumCPU()
-	runtime.GOMAXPROCS(cpus)
+	//cpus := 1
 	runtime.GOMAXPROCS(cpus)
 	chs := make([]chan int, cpus)
 
