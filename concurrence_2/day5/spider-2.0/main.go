@@ -14,14 +14,14 @@ var (
 	imgDir = `D:\www\Go\go_demo\concurrence_2\day5\spider-2.0\images\`
 	wg4ImageInfo sync.WaitGroup
 	wg4Download  sync.WaitGroup
-	dirPath = `concurrence_2\day5\spider-2.0\images\`
+	dirPath = `concurrence_2\day5\spider-2.0\images2\`
 )
 
 func main() {
-	baseUrl := `https://www.tupianzj.com/mingxingku/gangtainv/list_230`
+	baseUrl := `https://www.tupianzj.com/meinv/xinggan/list_176`
 	imageSavePath := spiderkit.GetImagePath(dirPath)
 	// 4 页
-	var pageSize = 4
+	var pageSize = 11
 	start := time.Now()
 	for i := 1 ; i <= pageSize ; i ++ {
 		var url string
