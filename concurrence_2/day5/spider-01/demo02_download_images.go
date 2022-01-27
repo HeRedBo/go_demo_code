@@ -21,15 +21,15 @@ var (
 	imgDir = "D:\\www\\Go\\go_demo\\concurrence_2\\day5\\spider-01\\images\\"
 	randomMT   sync.Mutex
 	downloadWG sync.WaitGroup
-	chSem      = make(chan int, 10)
+	chSem      = make(chan int, 100)
 )
 func main() {
 
 	start := time.Now()
 	imginfos := GetPageImagesInfos(url)
 	for _, imginfoMap := range imginfos {
-		DownloadImg(imginfoMap["url"],imginfoMap["filename"])
-		//DownloadImgAsync(imginfoMap["url"],imginfoMap["filename"])
+		//DownloadImg(imginfoMap["url"],imginfoMap["filename"])
+		DownloadImgAsync(imginfoMap["url"],imginfoMap["filename"])
 	}
 	//end := time.Now()
 	//consume := end.Sub(start).Seconds()
