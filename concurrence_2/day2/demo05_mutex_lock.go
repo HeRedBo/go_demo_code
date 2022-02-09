@@ -10,31 +10,60 @@ var wg sync.WaitGroup
 
 func main0501() {
 	var money = 2000
-	for i :=0 ; i < 10; i ++ {
-		for i :=0 ; i < 10; i ++ {
-				for j := 0; j < 1000; j ++   {
-					money += 1
-				}
+	for i := 0; i < 10; i++ {
+		for i := 0; i < 10; i++ {
+			for j := 0; j < 1000; j++ {
+				money += 1
+			}
 		}
 	}
 	fmt.Println("最终金额1", money)
 
-	var money2 =  2000
-	for i :=0 ; i < 10; i ++ {
+	var money2 = 2000
+	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func() {
-			for j := 0; j < 1000; j ++   {
+			for j := 0; j < 1000; j++ {
 				money2 += 1
 			}
-			wg.Done();
+			wg.Done()
 		}()
 	}
 	wg.Wait()
 	fmt.Println("最终金额2", money2)
 }
 
-
 func main() {
+	var money = 2000
+	for i := 0; i < 10; i++ {
+		for i := 0; i < 10; i++ {
+			for j := 0; j < 1000; j++ {
+				money += 1
+			}
+		}
+	}
+	fmt.Println("最终金额1", money)
+
+	var money2 = 2000
+	var mut sync.Mutex
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			mut.Lock()
+			for i := 0; i < 10; i++ {
+				for j := 0; j < 1000; j++ {
+					money2 += 1
+				}
+			}
+			mut.Unlock()
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+	fmt.Println("最终金额2", money2)
+}
+
+func main0503() {
 	var money = 2000
 
 	// 一只麦
@@ -47,15 +76,13 @@ func main() {
 		mt.Lock()
 		fmt.Println("小张抢到了麦，小张开始嗨")
 		money -= 300
-		<- time.After(10 * time.Second)
+		<-time.After(10 * time.Second)
 
 		//曲罢弃麦,其它人再去哄抢
 		mt.Unlock()
 		fmt.Println("小张姐弃麦")
 		wg.Done()
 	}()
-
-
 
 	wg.Add(1)
 	go func() {
@@ -64,7 +91,7 @@ func main() {
 		mt.Lock()
 		fmt.Println("小李抢到了麦，小李开始嗨")
 		money -= 300
-		<- time.After(10 * time.Second)
+		<-time.After(10 * time.Second)
 
 		//曲罢弃麦,其它人再去哄抢
 		mt.Unlock()
@@ -77,11 +104,11 @@ func main() {
 	wg.Add(1)
 	go func() {
 		fmt.Println("abcdefg")
-		<-time.After(1*time.Second)
+		<-time.After(1 * time.Second)
 		fmt.Println("hijklmn")
-		<-time.After(1*time.Second)
+		<-time.After(1 * time.Second)
 		fmt.Println("opqrst")
-		<-time.After(1*time.Second)
+		<-time.After(1 * time.Second)
 		fmt.Println("uvwxyz")
 		wg.Done()
 	}()
