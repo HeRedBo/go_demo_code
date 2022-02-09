@@ -16,20 +16,22 @@ import (
 )
 
 var (
-	url = `https://www.tupianzj.com/meinv/mm/jianshennvshen/`
+	url     = `https://www.tupianzj.com/meinv/mm/jianshennvshen/`
 	reImage = `<img.+?src="(http.+?)".*?>`
-	imgDir = "D:\\www\\Go\\go_demo\\concurrence_2\\day5\\spider-01\\images\\"
+	// imgDir = "D:\\www\\Go\\go_demo\\concurrence_2\\day5\\spider-01\\images\\"
+	imgDir     = "/Users/hehongbo/www/GO/go_demo_code/concurrence_2/day5/spider-01/images/"
 	randomMT   sync.Mutex
 	downloadWG sync.WaitGroup
 	chSem      = make(chan int, 100)
 )
+
 func main() {
 
 	start := time.Now()
 	imginfos := GetPageImagesInfos(url)
 	for _, imginfoMap := range imginfos {
 		//DownloadImg(imginfoMap["url"],imginfoMap["filename"])
-		DownloadImgAsync(imginfoMap["url"],imginfoMap["filename"])
+		DownloadImgAsync(imginfoMap["url"], imginfoMap["filename"])
 	}
 	//end := time.Now()
 	//consume := end.Sub(start).Seconds()
@@ -38,9 +40,8 @@ func main() {
 
 }
 
-
-func GetPageImagesInfos(url string ) []map[string]string {
-	html  := GetUrlHtml(url)
+func GetPageImagesInfos(url string) []map[string]string {
+	html := GetUrlHtml(url)
 	html = string(Common.ConvertToByte(html, "gbk", "utf8"))
 	re := regexp.MustCompile(Common.ReImage)
 	rets := re.FindAllStringSubmatch(html, -1)
@@ -64,22 +65,22 @@ func DownloadImgAsync(url, filename string) {
 		DownloadImg(url, filename)
 		<-chSem
 		downloadWG.Done()
-	} ()
+	}()
 	downloadWG.Wait()
 }
 
-func DownloadImg(url string , filename string) {
+func DownloadImg(url string, filename string) {
 	fmt.Println("DownloadImg...")
 
 	resp, err := http.Get(url)
 	defer resp.Body.Close()
 
 	imgBytes, _ := ioutil.ReadAll(resp.Body)
-	err = ioutil.WriteFile( filename, imgBytes, 0644)
+	err = ioutil.WriteFile(filename, imgBytes, 0644)
 	if err == nil {
 		fmt.Println(filename, "下载成功！")
 	} else {
-		fmt.Println("下载文件失败",err)
+		fmt.Println("下载文件失败", err)
 		fmt.Println(filename, "下载失败！")
 	}
 }
@@ -91,7 +92,7 @@ func DownloadImg(url string , filename string) {
 imgTag 图片<img>标签
 imgDir 目录位置
 suffix 文件名后缀
- */
+*/
 func GetImgNameFromTag(imgTag, imgUrl, imgDir string) string {
 	var filename string
 	//fmt.Println(imgTag)
@@ -141,8 +142,6 @@ func GetRandomName() string {
 	return timestamp + "_" + randomNum
 }
 
-
-
 /*从imgUrl中摘取图片名称*/
 func GetImgNameFromImgUrl(imgUrl string) string {
 	re := regexp.MustCompile(Common.ReImgName)
@@ -155,10 +154,9 @@ func GetImgNameFromImgUrl(imgUrl string) string {
 	}
 }
 
-
 func GetImgNameFromImageUrl(imgUrl string) string {
 	_, filename := filepath.Split(imgUrl)
-	if filename !=  "" {
+	if filename != "" {
 		return filename
 	} else {
 		return ""
@@ -173,7 +171,7 @@ func HandleError(err error, when string) {
 
 }
 
-func GetUrlHtml(url string) string{
+func GetUrlHtml(url string) string {
 	resp, err := http.Get(url)
 	HandleError(err, "Http.Get")
 	defer resp.Body.Close()

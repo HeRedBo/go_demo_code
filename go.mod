@@ -10,7 +10,8 @@ require (
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/kardianos/govendor v1.0.9 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	golang.org/x/sys v0.0.0-20201231184435-2d18734c6014 // indirect
-	golang.org/x/tools v0.0.0-20210104081019-d8d6ddbec6ee // indirect
+	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
+	golang.org/x/sys v0.0.0-20220222200937-f2425489ef4c // indirect
+	golang.org/x/tools v0.1.9 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
