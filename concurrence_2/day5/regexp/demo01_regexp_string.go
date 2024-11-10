@@ -13,6 +13,7 @@ func main01() {
 	buf := "abc azc a7c aac 888 a9c  tac"
 	//解析正则表达式，如果成功返回解释器
 	reg1 := regexp.MustCompile(`a.c`)
+
 	if reg1 == nil {
 		fmt.Println("regexp err")
 		return
@@ -85,7 +86,7 @@ func spiderLink() {
 	}
 }
 
-func main() {
+func main010() {
 	spiderPhone()
 	//spiderLink()
 

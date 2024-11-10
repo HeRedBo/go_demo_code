@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/PuerkitoBio/goquery"
 	"helloGO/concurrence_2/day5/spider-01/Common"
 	"io/ioutil"
+	"log"
 	"math/rand"
 	"net/http"
 	"os"
@@ -16,23 +18,29 @@ import (
 )
 
 var (
-	url     = `https://www.tupianzj.com/meinv/mm/jianshennvshen/`
+	//url     = `https://www.keke345.cc/` // 已失效
+	//url     = "https://www.tupianzj.com/meinv/xinggan/list_176" // 已失效
+	url = `https://www.3gbizhi.com/meinv`
+	//reImage = `<img src="(https.+?)".*?>`
 	reImage = `<img.+?src="(http.+?)".*?>`
+	//reImage = `<img\s+src\s*=\s*["']?([^"']+)["']?`
+	//reImage = `<img[\s\S]+?src="(http[\s\S]+?)"[\s\S]*?>`
 	// imgDir = "D:\\www\\Go\\go_demo\\concurrence_2\\day5\\spider-01\\images\\"
-	imgDir     = "/Users/hehongbo/www/GO/go_demo_code/concurrence_2/day5/spider-01/images/"
+	imgDir     = "/Users/hehongbo/www/GO/go_demo_code/concurrence_2/day5/spider-01/images2/"
 	randomMT   sync.Mutex
 	downloadWG sync.WaitGroup
 	chSem      = make(chan int, 100)
 )
 
 func main() {
-
 	start := time.Now()
 	imginfos := GetPageImagesInfos(url)
+	//GetPageImagesInfos3(url)
 	for _, imginfoMap := range imginfos {
-		//DownloadImg(imginfoMap["url"],imginfoMap["filename"])
+		//DownloadImg(imginfoMap["url"], imginfoMap["filename"])
 		DownloadImgAsync(imginfoMap["url"], imginfoMap["filename"])
 	}
+	//fmt.Println(imginfos)
 	//end := time.Now()
 	//consume := end.Sub(start).Seconds()
 	consume := time.Now().Sub(start).Seconds()
@@ -42,20 +50,28 @@ func main() {
 
 func GetPageImagesInfos(url string) []map[string]string {
 	html := GetUrlHtml(url)
-	html = string(Common.ConvertToByte(html, "gbk", "utf8"))
-	re := regexp.MustCompile(Common.ReImage)
+	//html = string(Common.ConvertToByte(html, "gbk", "utf8"))
+	re := regexp.MustCompile(reImage)
 	rets := re.FindAllStringSubmatch(html, -1)
 	imagesInfos := make([]map[string]string, 0)
 	for _, ret := range rets {
 		imgInfo := make(map[string]string)
-		//fmt.Println(ret[0])
-		//fmt.Println(ret[1])
 		imgUrl := ret[1]
 		imgInfo["url"] = imgUrl
 		imgInfo["filename"] = GetImgNameFromTag(ret[0], imgUrl, imgDir)
 		imagesInfos = append(imagesInfos, imgInfo)
 	}
 	return imagesInfos
+}
+
+func GetPageImagesInfos3(url string) {
+	res, err := http.Get(url)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer res.Body.Close()
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	fmt.Println(doc, err)
 }
 
 func DownloadImgAsync(url, filename string) {
@@ -85,7 +101,8 @@ func DownloadImg(url string, filename string) {
 	}
 }
 
-/**
+/*
+*
 从<img>标签中提取文件名（含地址）
 有 alt 使用alt 文件名， 没有使用时间戳_随机数做文件名
 参数：
@@ -175,7 +192,6 @@ func GetUrlHtml(url string) string {
 	resp, err := http.Get(url)
 	HandleError(err, "Http.Get")
 	defer resp.Body.Close()
-
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	html := string(bytes)
 	return html

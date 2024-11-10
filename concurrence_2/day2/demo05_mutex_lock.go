@@ -8,7 +8,7 @@ import (
 
 var wg sync.WaitGroup
 
-func main0501() {
+func main501() {
 	var money = 2000
 	for i := 0; i < 10; i++ {
 		for i := 0; i < 10; i++ {
@@ -33,7 +33,7 @@ func main0501() {
 	fmt.Println("最终金额2", money2)
 }
 
-func main() {
+func main502() {
 	var money = 2000
 	for i := 0; i < 10; i++ {
 		for i := 0; i < 10; i++ {
@@ -63,7 +63,7 @@ func main() {
 	fmt.Println("最终金额2", money2)
 }
 
-func main0503() {
+func main503() {
 	var money = 2000
 
 	// 一只麦

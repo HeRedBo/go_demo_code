@@ -37,7 +37,7 @@ func main101() {
 
 }
 
-/*生产者-消费者模型1:生产-消费*/
+/*生产者-消费者模型2:生产-物流-消费*/
 func main() {
 	chanStorage := make(chan string , 10 )
 	chanShop := make(chan string , 10)
