@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/PuerkitoBio/goquery"
+	"github.com/gookit/goutil/dump"
 	"helloGO/concurrence_2/day5/spider-01/Common"
+	"io"
 	"io/ioutil"
-	"log"
 	"math/rand"
+	"net"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -29,10 +30,10 @@ var (
 	imgDir     = "/Users/hehongbo/www/GO/go_demo_code/concurrence_2/day5/spider-01/images2/"
 	randomMT   sync.Mutex
 	downloadWG sync.WaitGroup
-	chSem      = make(chan int, 100)
+	chSem      = make(chan int, 5)
 )
 
-func main() {
+func main011() {
 	start := time.Now()
 	imginfos := GetPageImagesInfos(url)
 	//GetPageImagesInfos3(url)
@@ -53,6 +54,7 @@ func GetPageImagesInfos(url string) []map[string]string {
 	//html = string(Common.ConvertToByte(html, "gbk", "utf8"))
 	re := regexp.MustCompile(reImage)
 	rets := re.FindAllStringSubmatch(html, -1)
+	fmt.Println("捕获图片张数：", len(rets))
 	imagesInfos := make([]map[string]string, 0)
 	for _, ret := range rets {
 		imgInfo := make(map[string]string)
@@ -62,16 +64,6 @@ func GetPageImagesInfos(url string) []map[string]string {
 		imagesInfos = append(imagesInfos, imgInfo)
 	}
 	return imagesInfos
-}
-
-func GetPageImagesInfos3(url string) {
-	res, err := http.Get(url)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer res.Body.Close()
-	doc, err := goquery.NewDocumentFromReader(res.Body)
-	fmt.Println(doc, err)
 }
 
 func DownloadImgAsync(url, filename string) {
@@ -195,4 +187,36 @@ func GetUrlHtml(url string) string {
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	html := string(bytes)
 	return html
+}
+
+var httpClient http.Client
+
+func init() {
+	httpClient = http.Client{
+		Transport: &http.Transport{
+			DialContext: (&net.Dialer{
+				Timeout: 5 * time.Second, // 连接超时时间
+			}).DialContext,
+			TLSHandshakeTimeout: 5 * time.Second,  // TLS 握手超时时间
+			IdleConnTimeout:     90 * time.Second, // 空闲连接超时时间
+		},
+		Timeout: 10 * time.Second, // 总超时时间（包括连接、TLS握手、请求和响应）
+	}
+}
+
+func DownloadImgWithClient(url, filename string) {
+	dump.Println("DownloadImgWithClient...")
+	resp, err := httpClient.Get(url)
+	if err != nil {
+		dump.Println(filename, url, "文件链接请求失败")
+		return
+	}
+	defer resp.Body.Close()
+	imageBytes, _ := io.ReadAll(resp.Body)
+	err = os.WriteFile(filename, imageBytes, 0644)
+	if err == nil {
+		dump.Println(filename, "下载成功")
+	} else {
+		dump.Println(filename, "下载失败")
+	}
 }
