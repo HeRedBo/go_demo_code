@@ -62,10 +62,9 @@ var (
 		<a...href="https://www.hao123.com/link/https/?key=http%3A%2F%2Fwww.163.com%2F&amp;&amp;monkey=m-mingzhan-site&amp;c=CCBD97A87DB464FDCD39F475585D5AE6"...>
 	*/
 	reLink = `<a[\s\S]+?href="(http[\s\S]+?)"`
-
 )
 
-func spiderPhone () {
+func spiderPhone() {
 	html := GetHtml("https://www.haomagujia.com/")
 	//fmt.Println(html)
 
@@ -86,25 +85,21 @@ func spiderLink() {
 	}
 }
 
-
-func main() {
-	//spiderPhone()
-	spiderLink()
+func main2() {
+	spiderPhone()
+	//spiderLink()
 
 }
 
-
-func GetHtml(url string) string{
+func GetHtml(url string) string {
 	resp, err := http.Get(url)
 	HandleErr(err, "Http.Get")
 	defer resp.Body.Close()
-
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	html := string(bytes)
 
 	return html
 }
-
 
 func HandleErr(err error, when string) {
 	if err != nil {
