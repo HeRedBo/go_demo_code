@@ -44,7 +44,7 @@ func doSomeThing() {
 
 func main() {
 	//见识百万级并发
-	for i:=0;i<10 ;i++  {
+	for i:=0;i<100 ;i++  {
 		go doSomethingII("小分队"+strconv.Itoa(i))
 	}
 

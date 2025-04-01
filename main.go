@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"helloGO/basic_grammar"
 	"helloGO/func_program"
 )
 
 func main ()  {
+
 	fmt.Println("hello World")
 
 	//func_program.DataType();
@@ -51,7 +53,7 @@ func main ()  {
 	//func_program.SwitchOneByOne()
 
 
-	//func_program.SwitchMerge()
+	//func_program.SwitchMerge()append
 
 	//func_program.Switch3()
 
@@ -60,6 +62,7 @@ func main ()  {
 	//func_program.Defer1()
 	//func_program.Defer2()
 	//func_program.Defer4()
+	func_program.Defer5()
 	// hello world
 	//basic_grammar.Hello()
 
@@ -68,13 +71,16 @@ func main ()  {
 	//func_program.DelayDemo2()
 
 	// 递归
-	func_program.TimeIt(func_program.GetSum,10000000)
-	func_program.TimeIt(func_program.ReF,10000000)
-	//fmt.Printf(func_program.GetSum(1000000))
-	fmt.Printf("递归结果值是%f\n",func_program.GetSum(1000000))
-	fmt.Printf("递归结果值是%f\n",func_program.ReF(1000000))
+	//func_program.TimeIt(func_program.GetSum,10000000)
+	//func_program.TimeIt(func_program.ReF,10000000)
+	////fmt.Printf(func_program.GetSum(1000000))
+	//fmt.Printf("递归结果值是%f\n",func_program.GetSum(1000000))
+	//fmt.Printf("递归结果值是%f\n",func_program.ReF(1000000))
 	//func_program.TimeIt(func_program.ReF,100000)
 
+	//
+	basic_grammar.Hello()
+	return
 	// 变量表达式
 	//basic_grammar.Main001()
 	//basic_grammar.Main002()
@@ -90,7 +96,7 @@ func main ()  {
 	// 9x9 乘法表
 	// basic_grammar.Math9x9()
 	// 切片
-	//basic_grammar.SliceBase()
+	basic_grammar.SliceBase()
 	//basic_grammar.SliceAppend()
 	//basic_grammar.SliceAutoAppend()
 	//basic_grammar.Slice1()

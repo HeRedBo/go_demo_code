@@ -13,6 +13,7 @@ func main01() {
 	buf := "abc azc a7c aac 888 a9c  tac"
 	//解析正则表达式，如果成功返回解释器
 	reg1 := regexp.MustCompile(`a.c`)
+
 	if reg1 == nil {
 		fmt.Println("regexp err")
 		return
@@ -85,7 +86,7 @@ func spiderLink() {
 	}
 }
 
-func main2() {
+func main010() {
 	spiderPhone()
 	//spiderLink()
 
@@ -95,6 +96,7 @@ func GetHtml(url string) string {
 	resp, err := http.Get(url)
 	HandleErr(err, "Http.Get")
 	defer resp.Body.Close()
+
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	html := string(bytes)
 

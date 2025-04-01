@@ -7,13 +7,14 @@ import (
 	"path/filepath"
 	"regexp"
 )
-var savePath = "D:\\www\\Go\\go_demo\\concurrence_2\\day5\\regexp\\images\\"
 
-func main() {
-	var url = `https://www.tupianzj.com/meinv/mm/jianshennvshen/`
+var savePath = "/Users/hehongbo/www/GO/go_demo_code/concurrence_2/day5/regexp/images"
+
+func main0201() {
+	var url = `https://www.3gbizhi.com/meinv`
 	html := GetHtml(url)
 	fmt.Println(html)
-	var reLink  = `<img[\s\S]+?src="(http[\s\S]+?)"[\s\S]*?>`
+	var reLink = `<img[\s\S]+?src="(http[\s\S]+?)"[\s\S]*?>`
 	re := regexp.MustCompile(reLink)
 	rets := re.FindAllStringSubmatch(html, -1)
 	fmt.Println(rets)
@@ -22,7 +23,6 @@ func main() {
 		DownloadFileWithClient(x[1])
 	}
 }
-
 
 func DownloadFileWithClient(url string) {
 	//fmt.Println("DownloadFileWithClient...")
@@ -35,7 +35,7 @@ func DownloadFileWithClient(url string) {
 	defer resp.Body.Close()
 
 	imgBytes, _ := ioutil.ReadAll(resp.Body)
-	err = ioutil.WriteFile(savePath + filename, imgBytes, 0644)
+	err = ioutil.WriteFile(savePath+filename, imgBytes, 0644)
 	if err == nil {
 		fmt.Println(filename, "下载成功！")
 	} else {
@@ -43,4 +43,3 @@ func DownloadFileWithClient(url string) {
 	}
 
 }
-
