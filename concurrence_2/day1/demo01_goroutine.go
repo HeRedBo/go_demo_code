@@ -7,7 +7,7 @@ import (
 )
 
 // 协程并发
-func main001() {
+func main() {
 
 	//在一条独立的协程中执行匿名函数
 	go func() {
@@ -15,14 +15,13 @@ func main001() {
 			fmt.Println("im coroutine")
 			time.Sleep(time.Second)
 		}
-	} ()
+	}()
 
 	for {
 		fmt.Println("我是主协程")
 		time.Sleep(time.Second)
 	}
 }
-
 
 func main002() {
 	go doSomeThing()
@@ -34,18 +33,16 @@ func main002() {
 }
 
 func doSomeThing() {
-	for  {
+	for {
 		fmt.Println("im coroutine")
 		time.Sleep(time.Second)
 	}
 }
 
-
-
-func main() {
+func main003() {
 	//见识百万级并发
-	for i:=0;i<100 ;i++  {
-		go doSomethingII("小分队"+strconv.Itoa(i))
+	for i := 0; i < 100; i++ {
+		go doSomethingII("小分队" + strconv.Itoa(i))
 	}
 
 	for {
@@ -56,8 +53,7 @@ func main() {
 
 func doSomethingII(grname string) {
 	for {
-		fmt.Println(grname,"im coroutine")
+		fmt.Println(grname, "im coroutine")
 		time.Sleep(time.Second)
 	}
 }
-

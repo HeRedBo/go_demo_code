@@ -15,7 +15,7 @@ func main() {
 	//创建没有缓存能力的管道
 	//ch := make(chan int)
 	ch := make(chan int, 0)
-
+	//往管道里写数据
 	go func() {
 		//没人读管道，就永远写不进去
 		ch <- 123
@@ -25,12 +25,11 @@ func main() {
 	go func() {
 		time.Sleep(10 * time.Second)
 		//没人写就读不出来
-		x := <- ch
-		fmt.Println("数据已读出",x)
+		x := <-ch
+		fmt.Println("数据已读出", x)
 	}()
 
 	time.Sleep(11 * time.Second)
 	fmt.Println("Game Over!")
-
 
 }

@@ -1,0 +1,44 @@
+{"level":"info","ts":1745768913.5061162,"caller":"pack/pack_zap.go:28","msg":"this is info msg"}
+{"level":"error","ts":1745768913.50651,"caller":"pack/pack_zap.go:29","msg":"this is error msg"}
+{"level":"info","ts":1745768938.566284,"caller":"pack/pack_zap.go:27","msg":"this is info msg"}
+{"level":"error","ts":1745768938.566564,"caller":"pack/pack_zap.go:28","msg":"this is error msg"}
+{"level":"info","ts":1745769054.434724,"caller":"pack/pack_zap.go:28","msg":"this is info msg"}
+{"level":"error","ts":1745769054.43491,"caller":"pack/pack_zap.go:29","msg":"this is error msg"}
+{"level":"info","ts":1745769082.254826,"caller":"pack/pack_zap.go:28","msg":"this is info msg"}
+{"level":"error","ts":1745769082.2550242,"caller":"pack/pack_zap.go:29","msg":"this is error msg"}
+{"level":"info","ts":"2025-04-27T23:57:09.293+0800","caller":"pack/pack_zap.go:57","msg":"this is info msg"}
+{"level":"error","ts":"2025-04-27T23:57:09.294+0800","caller":"pack/pack_zap.go:58","msg":"this is error msg"}
+2025-04-28T00:10:38.538+0800	INFO	pack/pack_zap.go:59	this is info msg
+2025-04-28T00:10:38.540+0800	ERROR	pack/pack_zap.go:60	this is error msg
+2025-04-28T00:11:42.474+0800	info	pack/pack_zap.go:59	this is info msg
+2025-04-28T00:11:42.475+0800	error	pack/pack_zap.go:60	this is error msg
+2025-04-28T00:12:05.886+0800	info	pack/pack_zap.go:59	this is info msg
+2025-04-28T00:12:05.886+0800	error	pack/pack_zap.go:60	this is error msg
+{"level":"info","ts":"2025-04-28T00:13:04.972+0800","caller":"pack/pack_zap.go:59","msg":"this is info msg"}
+{"level":"error","ts":"2025-04-28T00:13:04.972+0800","caller":"pack/pack_zap.go:60","msg":"this is error msg"}
+{"level":"info","ts":"2025-04-28T00:13:17.477+0800","caller":"pack/pack_zap.go:59","msg":"this is info msg"}
+{"level":"error","ts":"2025-04-28T00:13:17.479+0800","caller":"pack/pack_zap.go:60","msg":"this is error msg"}
+{"level":"info","ts":"2025-04-28T00:15:01.081+0800","caller":"pack/pack_zap.go:60","msg":"this is info msg"}
+{"level":"error","ts":"2025-04-28T00:15:01.082+0800","caller":"pack/pack_zap.go:61","msg":"this is error msg"}
+{"level":"info","ts":"2025-04-28T00:15:16.185+0800","caller":"pack/pack_zap.go:60","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:15:16.186+0800","caller":"pack/pack_zap.go:61","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:20:10.241+0800","caller":"pack/pack_zap.go:60","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:20:10.241+0800","caller":"pack/pack_zap.go:61","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:20:14.639+0800","caller":"pack/pack_zap.go:60","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:20:14.639+0800","caller":"pack/pack_zap.go:61","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:20:17.056+0800","caller":"pack/pack_zap.go:60","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:20:17.057+0800","caller":"pack/pack_zap.go:61","msg":"this is warn msg"}
+{"level":"INFO","ts":"2025-04-28T00:20:34.464+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"WARN","ts":"2025-04-28T00:20:34.465+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:20:49.355+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:20:49.356+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:21:12.718+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:21:12.718+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:21:21.948+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:21:21.949+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:21:26.469+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:21:26.470+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:21:30.789+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:21:30.790+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}
+{"level":"info","ts":"2025-04-28T00:21:37.492+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:21:37.493+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}

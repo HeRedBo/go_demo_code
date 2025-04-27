@@ -28,7 +28,6 @@ func VarConst() {
 	fmt.Println("圆的面积是", area)
 }
 
-
 func VarConst2() {
 	fmt.Println("我又活过来了~")
 
@@ -47,15 +46,13 @@ func VarConst2() {
 	)
 	fmt.Println("年龄变量是", age, "身高变量是", height, "体重变量是", weight)
 
-
 	/*修改变量的值*/
-	age    = 30
+	age = 30
 	height = 175
 	weight = 80
 
 	fmt.Println("年龄变量是", age, "身高变量是", height, "体重变量是", weight)
 }
-
 
 func VarConst3() {
 	//带var定义，一个或多个，声明类型或不声明类型
@@ -75,7 +72,6 @@ func lowerFunc() {
 
 	fmt.Println("lowerFunc")
 }
-
 
 func UpperFunc() {
 
