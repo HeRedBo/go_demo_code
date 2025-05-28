@@ -2,27 +2,21 @@ package main
 
 import (
 	"fmt"
-	"helloGO/basic_grammar"
-	"helloGO/func_program"
 )
 
-func main ()  {
+func main() {
 
 	fmt.Println("hello World")
-
-	//func_program.DataType();
+	//func_program.DataType()
 
 	//func_program.Hello()
 	//func_program.VarConst()
 	//
 	//func_program.VarConst2()
-	//
 	//func_program.VarConst3()
 	//
 	//func_program.UpperFunc()
-
 	//func_program.PrintIoTaCount()
-
 	// 基本的数学运算
 	//func_program.BaseMath()
 
@@ -52,7 +46,6 @@ func main ()  {
 	// /*条件表达式的结果落在多个不同的孤立值上*/
 	//func_program.SwitchOneByOne()
 
-
 	//func_program.SwitchMerge()append
 
 	//func_program.Switch3()
@@ -62,13 +55,17 @@ func main ()  {
 	//func_program.Defer1()
 	//func_program.Defer2()
 	//func_program.Defer4()
-	func_program.Defer5()
+	//func_program.Defer5()
 	// hello world
 	//basic_grammar.Hello()
 
 	// 匿名函数：
-	// func_program.DelayDemo1()
+	//func_program.DelayDemo1()
 	//func_program.DelayDemo2()
+
+	// 13 函数和参数
+	//func_program.SayLove2Go()
+	//func_program.SayLoveToSb("小盒")
 
 	// 递归
 	//func_program.TimeIt(func_program.GetSum,10000000)
@@ -79,8 +76,7 @@ func main ()  {
 	//func_program.TimeIt(func_program.ReF,100000)
 
 	//
-	basic_grammar.Hello()
-	return
+	//basic_grammar.Hello()
 	// 变量表达式
 	//basic_grammar.Main001()
 	//basic_grammar.Main002()
@@ -96,7 +92,7 @@ func main ()  {
 	// 9x9 乘法表
 	// basic_grammar.Math9x9()
 	// 切片
-	basic_grammar.SliceBase()
+	//basic_grammar.SliceBase()
 	//basic_grammar.SliceAppend()
 	//basic_grammar.SliceAutoAppend()
 	//basic_grammar.Slice1()
@@ -104,11 +100,13 @@ func main ()  {
 
 	// 递归处理相关数据
 
-
 	// 异常处理
 	//exception_handling.ErrorPanic()
 
 	// 恐慌与处理
 
+	// region 协程案例
+
+	// endregion
 
 }

@@ -1,0 +1,4 @@
+{"level":"info","ts":"2025-04-28T00:21:59.535+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"warn","ts":"2025-04-28T00:21:59.535+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}
+{"level":"INFO","ts":"2025-04-28T00:22:10.661+0800","caller":"pack/pack_zap.go:61","msg":"this is info msg"}
+{"level":"WARN","ts":"2025-04-28T00:22:10.661+0800","caller":"pack/pack_zap.go:62","msg":"this is warn msg"}
