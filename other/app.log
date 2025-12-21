@@ -1,0 +1,4 @@
+[INFO] 2025/05/27 23:35:39 demo13_log.go:30: 这是一条普通的日志信息
+[INFO] 2025/05/27 23:35:39 demo13_log.go:31: 用户ID: 123 执行了操作: 登录
+{"level":"info","ts":"2025-05-27T23:39:58.469+0800","caller":"other/demo14_zap_log.go:39","msg":"这是一条普通的日志信息","用户ID":123}
+{"level":"error","ts":"2025-05-27T23:39:58.483+0800","caller":"other/demo14_zap_log.go:40","msg":"发生了一个错误","stacktrace":"main.main\n\t/Users/hehongbo/www/GO/go_demo_code/other/demo14_zap_log.go:40\nruntime.main\n\t/usr/local/go/src/runtime/proc.go:272"}
