@@ -1,0 +1,49 @@
+{
+  "id": 35362,
+  "m_p_mp_id": 0,
+  "price_config_type": 1,
+  "m_id": 0,
+  "p_s_id": 38,
+  "product_id": 10010,
+  "goods_sku": "SK000178",
+  "self_price_type": 1,
+  "source_pack_id": 122,
+  "min_amount": 30,
+  "max_amount": 30,
+  "template_id": 0,
+  "before_price": "0.000",
+  "price": "9962.000",
+  "range": [
+    "30"
+  ],
+  "source_pack": {
+    "id": 122,
+    "price_config_type": 1,
+    "product_id": 10010,
+    "name": "资源包1",
+    "goods_sku": "SK000178",
+    "status": 1,
+    "merchant_market_center_template": [
+      "1",
+      "2",
+      "3"
+    ],
+    "source_pack_type_id": 1,
+    "source_pack_limit_id": 26,
+    "modify_price_status": 1,
+    "source_pack_type_text": "官方资源",
+    "source_pack_limit_text": "不限制充值平台"
+  },
+  "product_info": {
+    "id": 10010,
+    "name": "联通卡密直充（非98卡）",
+    "order_type": 10001,
+    "status": 1,
+    "support_prov_price": 3,
+    "modify_price_status": 2,
+    "self_price_type": 1,
+    "product_self_price_type": 1,
+    "product_open_status": 1,
+    "modify_price_status_text": ""
+  }
+}
