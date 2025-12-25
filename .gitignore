@@ -2,3 +2,4 @@
 *.exe
 !.gitkeep
 concurrence_2/day5/spider-01/images2
+zaplogger/logs
