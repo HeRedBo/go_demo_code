@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gookit/goutil/dump"
 	"github.com/samber/lo"
+	"strings"
 )
 
 // 定义结构体（模拟 PHP 多维数组）
@@ -42,4 +43,14 @@ func ArrayDemo() {
 	dump.P("Values:", values)
 	fmt.Println("Keys:", keys)
 	fmt.Println("Values:", values)
+
+	// array_map
+	arr := []string{" apple ", " banana "}
+	clean := lo.Map(arr, func(s string, _ int) string {
+		return strings.TrimSpace(s)
+	})
+	dump.P(clean)
+
+	// clean = []string{"apple", "banana"}
+
 }
