@@ -25,4 +25,12 @@ func main() {
 		log.Fatal(err)
 	}
 	log.Println("查询结果：", list, "总条数：", total)
+
+	// 测试你的核心需求：权重排序
+	resultList, total, err := ScriptWeightSortSearch(req)
+	if err != nil {
+		log.Fatalf("查询失败: %v", err)
+	}
+	log.Println("✅ 查询总条数：", total)
+	log.Println("✅ 查询结果：", resultList)
 }
