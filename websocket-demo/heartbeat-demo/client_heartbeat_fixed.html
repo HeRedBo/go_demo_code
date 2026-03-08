@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>双向心跳WebSocket测试（修复版）</title>
+</head>
+<body>
+<h1>双向心跳 WebSocket 测试（修复版）</h1>
+<div>
+    <label>用户ID：</label>
+    <input type="text" id="userId" value="demo01">
+    <button onclick="connect()">连接</button>
+    <button onclick="disconnect()">断开</button>
+</div>
+<div>
+    <input type="text" id="msgInput" placeholder="输入消息">
+    <button onclick="sendMsg()">发送</button>
+</div>
+<div id="log" style="margin-top: 20px; white-space: pre-line; height: 400px; border: 1px solid #ccc; padding: 10px; overflow-y: auto;"></div>
+
+<script>
+    let ws = null;
+    let pingTicker = null; // 客户端心跳定时器
+    const PING_INTERVAL = 25000; // 客户端心跳间隔（25秒）
+    const PING_MESSAGE_TYPE = 0x8; // Ping帧类型（RFC6455标准）
+    const PONG_MESSAGE_TYPE = 0x9; // Pong帧类型
+
+    // 日志输出
+    function log(text) {
+        const logDiv = document.getElementById("log");
+        logDiv.innerHTML += `[${new Date().toLocaleTimeString()}] ${text}\n`;
+        logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    // 连接WebSocket
+    function connect() {
+        const userId = document.getElementById("userId").value.trim();
+        if (!userId) {
+            alert("请输入用户ID");
+            return;
+        }
+
+        // 关闭已有连接
+        if (ws) {
+            disconnect();
+        }
+
+        // 建立连接
+        const url = `ws://localhost:8090/ws?userId=${userId}`;
+        log(`🔌 正在连接: ${url}`);
+        ws = new WebSocket(url);
+
+        // 重写send方法，支持发送Ping帧（兼容所有浏览器）
+        ws.sendPing = function(data) {
+            if (this.readyState !== WebSocket.OPEN) {
+                log("❌ 连接未打开，无法发送Ping");
+                return;
+            }
+            // 浏览器原生不支持直接发Ping帧，这里用"模拟心跳"的方式：
+            // 方案1（推荐）：发送特殊标记的文本消息作为客户端心跳
+            const pingMsg = JSON.stringify({
+                type: "ping",
+                data: data || `client_ping_${Date.now()}`
+            });
+            this.send(pingMsg);
+            return true;
+        };
+
+        // 连接成功
+        ws.onopen = function() {
+            log(`✅ 连接成功 (状态码: ${ws.readyState})`);
+
+            // 启动客户端心跳（模拟Ping）
+            startClientPing();
+        };
+
+        // 接收消息（文本/二进制）
+        ws.onmessage = function(event) {
+            try {
+                // 解析JSON消息（区分心跳和业务消息）
+                const msg = JSON.parse(event.data);
+                if (msg.type === "pong") {
+                    log(`🏓 收到服务端Pong响应: ${msg.data}`);
+                } else {
+                    log(`📥 收到业务消息: ${event.data}`);
+                }
+            } catch (e) {
+                // 非JSON格式的普通文本消息
+                log(`📥 收到文本消息: ${event.data}`);
+            }
+        };
+
+        // 连接关闭
+        ws.onclose = function(event) {
+            log(`❌ 连接关闭 (代码: ${event.code}, 原因: ${event.reason})`);
+            ws = null;
+
+            // 停止客户端心跳
+            stopClientPing();
+        };
+
+        // 连接错误
+        ws.onerror = function(error) {
+            log(`❌ 连接错误: ${error.message || error}`);
+        };
+    }
+
+    // 断开连接
+    function disconnect() {
+        if (ws) {
+            log("🔌 客户端主动关闭连接");
+            ws.close(1000, "客户端主动关闭");
+        }
+    }
+
+    // 发送业务消息
+    function sendMsg() {
+        if (!ws || ws.readyState !== WebSocket.OPEN) {
+            log("❌ 连接未建立，无法发送消息");
+            return;
+        }
+
+        const input = document.getElementById("msgInput");
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        ws.send(msg);
+        log(`📤 发送业务消息: ${msg}`);
+        input.value = "";
+    }
+
+    // 启动客户端心跳（模拟Ping）
+    function startClientPing() {
+        // 先停止已有定时器
+        stopClientPing();
+
+        log(`⏰ 启动客户端心跳（间隔${PING_INTERVAL/1000}秒）`);
+        // 定时发送模拟Ping消息
+        pingTicker = setInterval(() => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                const pingData = `client_ping_${Date.now()}`;
+                ws.sendPing(pingData); // 调用重写的sendPing方法
+                log(`🏓 发送客户端Ping: ${pingData}`);
+            }
+        }, PING_INTERVAL);
+    }
+
+    // 停止客户端心跳
+    function stopClientPing() {
+        if (pingTicker) {
+            clearInterval(pingTicker);
+            pingTicker = null;
+            log("⏹️ 停止客户端心跳");
+        }
+    }
+</script>
+</body>
+</html>

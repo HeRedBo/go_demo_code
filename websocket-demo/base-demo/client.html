@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket测试</title>
+</head>
+<body>
+<h1>WebSocket 测试客户端</h1>
+<div>
+    <input type="text" id="msgInput" placeholder="输入消息">
+    <button onclick="sendMsg()">发送</button>
+</div>
+<div id="msgList" style="margin-top: 20px; white-space: pre-line;"></div>
+
+<script>
+    // 连接服务端WebSocket
+    const ws = new WebSocket("ws://localhost:8088/ws");
+
+    // 连接成功回调
+    ws.onopen = function() {
+        addMsg("✅ 连接成功（长连接已建立）");
+    };
+
+    // 接收服务端消息
+    ws.onmessage = function(event) {
+        addMsg(`📥 服务端回复: ${event.data}`);
+    };
+
+    // 连接关闭回调
+    ws.onclose = function() {
+        addMsg("❌ 连接关闭");
+    };
+
+    // 错误回调
+    ws.onerror = function(error) {
+        addMsg(`❌ 错误: ${error}`);
+    };
+
+    // 发送消息到服务端
+    function sendMsg() {
+        const input = document.getElementById("msgInput");
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        ws.send(msg);
+        addMsg(`📤 发送消息: ${msg}`);
+        input.value = "";
+    }
+
+    // 添加消息到页面
+    function addMsg(text) {
+        const list = document.getElementById("msgList");
+        list.innerHTML += text + "\n";
+    }
+</script>
+</body>
+</html>

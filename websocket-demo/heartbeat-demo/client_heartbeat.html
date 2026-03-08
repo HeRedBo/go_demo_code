@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>双向心跳WebSocket测试</title>
+</head>
+<body>
+<h1>双向心跳 WebSocket 测试</h1>
+<div>
+    <label>用户ID：</label>
+    <input type="text" id="userId" value="user1">
+    <button onclick="connect()">连接</button>
+    <button onclick="disconnect()">断开</button>
+</div>
+<div>
+    <input type="text" id="msgInput" placeholder="输入消息">
+    <button onclick="sendMsg()">发送</button>
+</div>
+<div id="log" style="margin-top: 20px; white-space: pre-line; height: 400px; border: 1px solid #ccc; padding: 10px; overflow-y: auto;"></div>
+
+<script>
+    let ws = null;
+    let pingTicker = null; // 客户端心跳定时器
+    const PING_INTERVAL = 25000; // 客户端心跳间隔（25秒）
+
+    // 日志输出
+    function log(text) {
+        const logDiv = document.getElementById("log");
+        logDiv.innerHTML += `[${new Date().toLocaleTimeString()}] ${text}\n`;
+        logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    // 连接WebSocket
+    function connect() {
+        const userId = document.getElementById("userId").value.trim();
+        if (!userId) {
+            alert("请输入用户ID");
+            return;
+        }
+
+        // 关闭已有连接
+        if (ws) {
+            disconnect();
+        }
+
+        // 建立连接
+        const url = `ws://localhost:8089/ws?userId=${userId}`;
+        ws = new WebSocket(url);
+
+        // 连接成功
+        ws.onopen = function() {
+            log(`✅ 连接成功 (${url})`);
+
+            // 启动客户端心跳（主动发Ping）
+            startClientPing();
+        };
+
+        // 接收消息
+        ws.onmessage = function(event) {
+            log(`📥 收到消息: ${event.data}`);
+        };
+
+        // 接收Pong响应（服务端回复的Pong）
+        ws.onpong = function(event) {
+            log(`🏓 收到服务端Pong响应: ${event.data || '空'}`);
+        };
+
+        // 连接关闭
+        ws.onclose = function(event) {
+            log(`❌ 连接关闭 (代码: ${event.code}, 原因: ${event.reason})`);
+            ws = null;
+
+            // 停止客户端心跳
+            stopClientPing();
+        };
+
+        // 连接错误
+        ws.onerror = function(error) {
+            log(`❌ 连接错误: ${error}`);
+        };
+    }
+
+    // 断开连接
+    function disconnect() {
+        if (ws) {
+            ws.close(1000, "客户端主动关闭");
+        }
+    }
+
+    // 发送消息
+    function sendMsg() {
+        if (!ws || ws.readyState !== WebSocket.OPEN) {
+            log("❌ 连接未建立，无法发送消息");
+            return;
+        }
+
+        const input = document.getElementById("msgInput");
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        ws.send(msg);
+        log(`📤 发送消息: ${msg}`);
+        input.value = "";
+    }
+
+    // 启动客户端心跳（定时发Ping）
+    function startClientPing() {
+        // 先停止已有定时器
+        stopClientPing();
+
+        // 定时发送Ping
+        pingTicker = setInterval(() => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                const pingData = `client_ping_${Date.now()}`;
+                ws.sendPing(pingData); // 发送Ping消息
+                log(`🏓 发送客户端Ping: ${pingData}`);
+            }
+        }, PING_INTERVAL);
+    }
+
+    // 停止客户端心跳
+    function stopClientPing() {
+        if (pingTicker) {
+            clearInterval(pingTicker);
+            pingTicker = null;
+            log("⏹️ 停止客户端心跳");
+        }
+    }
+</script>
+</body>
+</html>
