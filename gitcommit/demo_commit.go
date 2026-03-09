@@ -9,6 +9,12 @@ import (
 func main() {
 	DemoAction1()
 	DemoAction2()
+
+	// 第三次内容提交内容
+	DemoAction3()
+
+	// 第三次 最佳新的方法
+	DemoAction5(5, 6)
 }
 
 func DemoAction1() {
@@ -27,5 +33,11 @@ func DemoAction3() {
 }
 
 func DemoAction4(num1 int, num2 int) int {
+	return num1 + num2
+}
+
+func DemoAction5(num1 int, num2 int) int {
+	dump.Println(num1 + num2)
+	dump.Println("DemoAction5 content")
 	return num1 + num2
 }
