@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-
+	DemoAction1()
+	DemoAction2()
 }
 
 func DemoAction1() {
@@ -22,4 +23,9 @@ func DemoAction2() {
 
 func DemoAction3() {
 	fmt.Println("Demo Action 3")
+	dump.P(DemoAction4(1, 3))
+}
+
+func DemoAction4(num1 int, num2 int) int {
+	return num1 + num2
 }
