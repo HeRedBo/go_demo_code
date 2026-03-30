@@ -2,9 +2,10 @@ package samber
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/gookit/goutil/dump"
 	"github.com/samber/lo"
-	"strings"
 )
 
 // 定义结构体（模拟 PHP 多维数组）
