@@ -1,4 +1,4 @@
-package limiter
+package limiterlocal
 
 import (
 	"fmt"
@@ -128,10 +128,10 @@ func TestSlidingWindow_ExceedRate_Reject(t *testing.T) {
 
 	// 前 5 个通过
 	//for i := 0; i < 5; i++ {
-	//	limiter.Allow()
+	//	limiter-local.Allow()
 	//}
 	//// 第 6 个应该被拒绝
-	//if limiter.Allow() {
+	//if limiter-local.Allow() {
 	//	t.Fatal("第 6 个请求应该被限流，但通过了")
 	//}
 
