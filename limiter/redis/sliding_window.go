@@ -25,19 +25,23 @@ func NewSlidingWindow(client redis.Cmdable, cfg limiter.Config) *SlidingWindow {
 	script := redis.NewScript(`
 		local key = KEYS[1]
 		local limit = tonumber(ARGV[1])
-		local window_ms = tonumber(ARGV[2])
+		local window_ms = tonumber(ARGV[2])  -- 改回毫秒
 		local now = tonumber(ARGV[3])
 		local expire = tonumber(ARGV[4])
 
+		-- 清理过期数据
 		redis.call("ZREMRANGEBYSCORE", key, 0, now - window_ms)
-		local count = redis.call("ZCARD", key)
 
+		-- 统计数量
+		local count = redis.call("ZCARD", key)
 		if count >= limit then
 			return 0
 		end
 
-		redis.call("ZADD", key, now, now)
+		-- 每个请求用唯一值，确保同一毫秒也能计数
+		redis.call("ZADD", key, now, tostring(now) .. redis.call("INCR", key..":seq"))
 		redis.call("EXPIRE", key, expire)
+		redis.call("EXPIRE", key..":seq", expire)
 		return 1
 	`)
 

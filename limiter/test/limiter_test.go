@@ -142,10 +142,6 @@ func TestRedis_Limiter(t *testing.T) {
 					t.Fatal("expected allow")
 				}
 
-				// 🔥 只给 sliding_window 加 sleep
-				if tt.name == "sliding_window" {
-					time.Sleep(2 * time.Microsecond)
-				}
 			}
 
 			ok, _ := l.Allow()
