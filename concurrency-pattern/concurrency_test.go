@@ -1,16 +1,16 @@
 package main
 
-func main01() {
-	// Go 10 大核心并发模式（实战必用）
-	// 1\生产者 - 消费者模式（最基础）
-	//ch := make(chan int)
-	//go producer1(ch)
-	//consumer1(ch)
+import "testing"
 
-	// Worker 池模式（控制并发数）
+func TestProducerConsumer(t *testing.T) {
+	ch := make(chan int)
+	go producer(ch)
+	consumer(ch)
+}
+
+func TestWorker(t *testing.T) {
 	jobs := make(chan int, 5)
 	results := make(chan int, 5)
-
 	// 启动3个worker
 	for w := 1; w <= 3; w++ {
 		go worker(w, jobs, results)
