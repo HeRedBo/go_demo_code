@@ -196,7 +196,7 @@ func gen(nums ...int) <-chan int {
 }
 
 // 平方处理
-func square(in <-chan int) <-chan int {
+func square1(in <-chan int) <-chan int {
 	out := make(chan int)
 	go func() {
 		for n := range in {
@@ -210,7 +210,7 @@ func square(in <-chan int) <-chan int {
 func pipelineDeme() {
 	// 管道：生成 -> 平方 -> 输出
 	c := gen(1, 2, 3)
-	out := square(c)
+	out := square1(c)
 
 	for v := range out {
 		fmt.Println(v) // 1,4,9
