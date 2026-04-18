@@ -2,8 +2,6 @@ package main
 
 import (
 	"testing"
-
-	"github.com/gookit/goutil/dump"
 )
 
 func TestFanOutFanIn(t *testing.T) {
@@ -11,7 +9,16 @@ func TestFanOutFanIn(t *testing.T) {
 	workers := fanOut(in, 3)
 	out := fanIn(workers...)
 	for n := range out {
-		dump.P(n)
 		t.Log(n)
 	}
+
+}
+
+func TestRunSearchPipeline(t *testing.T) {
+
+	runSearchPipeline("Golang 并发编程")
+}
+
+func TestRobustSearch(t *testing.T) {
+	robustSearch("Golang 错误处理")
 }
